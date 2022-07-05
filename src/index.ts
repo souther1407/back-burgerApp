@@ -3,6 +3,8 @@ const app = express();
 import Logger from './utils/Logger.js';
 import db from './db/sequelize.js';
 import cors from 'cors';
+import dotenv from "dotenv";
+dotenv.config()
 const { productos, categorias } = db.models;
 app.use(express.json());
 app.use(express.urlencoded());
@@ -11,7 +13,8 @@ app.use(cors());
 import setearRutas from './routes.js';
 setearRutas(app);
 
-app.listen(8080, async () => {
+
+app.listen(process.env.PORT || 8080, async () => {
   Logger.success('listening at port 8080');
   await db.sync({ force: true });
   Logger.success('db created');
