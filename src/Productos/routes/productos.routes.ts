@@ -10,7 +10,7 @@ import {isTokenValid,verifyToken} from "../../Middelwares/Token.js";
 const { handleHttpError } = ErrorHandler;
 const router = Router();
 
-router.get('/',verifyToken,isTokenValid, async (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
     const productos = await obtenerProductos();
     res.json(productos);
