@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import {config}from "dotenv";
 config();
 const {SECRET} = process.env;
+
 export const verifyToken=(req:Request,res:Response,next:NextFunction)=>{
     const token= req.headers.authorization?.split(" ")[1];
     if(!token) res.status(UNAUTHORIZED).json({error:"no permitido"})
