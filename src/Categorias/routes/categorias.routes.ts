@@ -6,7 +6,7 @@ import {
   borrarCategoria,
 } from '../services/categorias.services.js';
 
-import {isTokenValid,verifyToken} from "../../Middelwares/Token";
+import {isTokenValid,verifyToken} from "../../Middelwares/Token.js";
 import ErrorHandler from '../../utils/ErrorHandler.js';
 const { handleHttpError } = ErrorHandler;
 const router = Router();

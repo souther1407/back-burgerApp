@@ -6,7 +6,7 @@ import {
   borrar,
 } from '../services/productos.services.js';
 import ErrorHandler from '../../utils/ErrorHandler.js';
-import {isTokenValid,verifyToken} from "../../Middelwares/Token";
+import {isTokenValid,verifyToken} from "../../Middelwares/Token.js";
 const { handleHttpError } = ErrorHandler;
 const router = Router();
 
