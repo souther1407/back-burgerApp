@@ -1,5 +1,5 @@
 import {Request,Response,NextFunction} from "express";
-import {UNAUTHORIZED} from "../httpCodes";
+import {UNAUTHORIZED} from "../httpCodes.js";
 import jwt from "jsonwebtoken";
 import {config}from "dotenv";
 config();
