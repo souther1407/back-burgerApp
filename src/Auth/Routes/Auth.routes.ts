@@ -5,8 +5,8 @@ import { validarPassword } from '../Auth.js';
 router.post('/ingresar', (req, res) => {
   const { password } = req.body;
   try {
-    const esValida = validarPassword(password);
-    res.json({ esValida });
+    const token = validarPassword(password);
+    res.json({ token });
   } catch (error) {
     console.log(error);
   }

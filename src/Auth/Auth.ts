@@ -1,10 +1,11 @@
 import dotenv from 'dotenv';
+import jwt from "jsonwebtoken";
 dotenv.config();
-const { PASSWORD } = process.env;
+const { PASSWORD,SECRET } = process.env;
 
 export const validarPassword = (password: string) => {
   if (password === PASSWORD) {
-    return true;
+    return jwt.sign(password,SECRET as string);
   }
   return false;
 };

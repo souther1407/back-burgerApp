@@ -19,8 +19,7 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-  console.log(req.body);
-
+  console.log("post",req.body);
   try {
     const nuevoProducto = await crear(req.body);
     res.json(nuevoProducto);
