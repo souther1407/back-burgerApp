@@ -6,10 +6,11 @@ import {
   borrar,
 } from '../services/productos.services.js';
 import ErrorHandler from '../../utils/ErrorHandler.js';
+import {isTokenValid,verifyToken} from "../../Middelwares/Token";
 const { handleHttpError } = ErrorHandler;
 const router = Router();
 
-router.get('/', async (req: Request, res: Response) => {
+router.get('/',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   try {
     const productos = await obtenerProductos();
     res.json(productos);
@@ -18,7 +19,7 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   console.log("post",req.body);
   try {
     const nuevoProducto = await crear(req.body);
@@ -29,7 +30,7 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-router.put('/:id', async (req: Request, res: Response) => {
+router.put('/:id',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const modifacado = await modificar(req.body, id);
@@ -39,7 +40,7 @@ router.put('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const borrado = await borrar(id);

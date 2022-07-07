@@ -6,11 +6,12 @@ import {
   borrarCategoria,
 } from '../services/categorias.services.js';
 
+import {isTokenValid,verifyToken} from "../../Middelwares/Token";
 import ErrorHandler from '../../utils/ErrorHandler.js';
 const { handleHttpError } = ErrorHandler;
 const router = Router();
 
-router.get('/', async (req: Request, res: Response) => {
+router.get('/',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   try {
     const categorias = await obtenerCategorias();
     res.json(categorias);
@@ -19,7 +20,7 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   console.log('AVER', req.body);
   try {
     const nuevaCategoria = await crearCategoria(req.body);
@@ -29,7 +30,7 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-router.put('/:id', async (req: Request, res: Response) => {
+router.put('/:id',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const categoriaEditada = await editarCategoria(req.body, id);
@@ -39,7 +40,7 @@ router.put('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const borrado = await borrarCategoria(id);
