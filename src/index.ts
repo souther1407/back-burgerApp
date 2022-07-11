@@ -5,7 +5,8 @@ import db from './db/sequelize.js';
 import cors from 'cors';
 import dotenv from "dotenv";
 dotenv.config()
-const { productos, categorias } = db.models;
+const { productos, categorias,variantes } = db.models;
+
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
@@ -16,10 +17,10 @@ setearRutas(app);
 
 app.listen(process.env.PORT || 8080, async () => {
   Logger.success('listening at port 8080');
-  await db.sync({ force: false });
+  await db.sync({ force: true });
   Logger.success('db created');
 
-  categorias.bulkCreate([
+  await categorias.bulkCreate([
     {
       titulo: 'Promos',
       subtitulo: 'aprovecha los mejores precios',
@@ -32,7 +33,7 @@ app.listen(process.env.PORT || 8080, async () => {
     },
   ]);
 
-  productos.bulkCreate([
+  await productos.bulkCreate([
     {
       titulo: 'Promo Enero',
       descripcion:
@@ -86,5 +87,10 @@ app.listen(process.env.PORT || 8080, async () => {
       categoriaId: 3,
     },
   ]);
+
+  await variantes.bulkCreate([
+    {titulo:"Doble",precio:400,productoId:3},
+    {titulo:"Triple",precio:600,productoId:3},
+  ])
 });
 
