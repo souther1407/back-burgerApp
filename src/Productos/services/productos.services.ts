@@ -1,5 +1,5 @@
 import db from "../../db/sequelize.js";
-const {productos,categorias} = db.models;
+const {productos,categorias,variantes} = db.models;
 
 interface Producto{
     titulo:string,
@@ -9,7 +9,7 @@ interface Producto{
 }
 
 export async function obtenerProductos() {
-    return await productos.findAll();
+    return await productos.findAll({include:{model:variantes}});
 }
 
 export async function crear(datos:Producto) {

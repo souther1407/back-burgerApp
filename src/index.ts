@@ -18,7 +18,7 @@ setearRutas(app);
 app.listen(process.env.PORT || 8080, async () => {
   Logger.success('listening at port 8080');
   await db.sync({ force: false });
-  //aa
+  //aaa
   Logger.success('db created');
 
   await categorias.bulkCreate([
