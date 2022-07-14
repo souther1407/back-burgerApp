@@ -92,6 +92,9 @@ app.listen(process.env.PORT || 8080, async () => {
   await variantes.bulkCreate([
     {titulo:"Doble",precio:400,productoId:3},
     {titulo:"Triple",precio:600,productoId:3},
+    {titulo:"Quintuple",precio:6000,productoId:3},
+    {titulo:"Ultra nugget",precio:60000,productoId:5},
+    {titulo:"Con mucho queso",precio:50000,productoId:5},
   ])
 });
 
