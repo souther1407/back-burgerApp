@@ -8,6 +8,7 @@ import {
 import ErrorHandler from '../../utils/ErrorHandler.js';
 const { handleHttpError } = ErrorHandler;
 const router = Router();
+import {isTokenValid,verifyToken} from "../../Middelwares/Token.js";
 
 router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -19,7 +20,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   try {
     const nuevaVariante = await crearVariante(req.body);
     res.json(nuevaVariante);
@@ -28,7 +29,7 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const varianteEliminada = await eliminarVariante(id);
@@ -38,7 +39,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.put('/:id', async (req: Request, res: Response) => {
+router.put('/:id',verifyToken,isTokenValid, async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const varianteModificada = await modificarVariante(id, req.body);
