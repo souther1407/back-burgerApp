@@ -20,6 +20,6 @@ export const isTokenValid = (req:Request,res:Response,next:NextFunction) => {
         const payload=jwt.verify(token,SECRET as string)
         next();
     } catch (error) {
-        res.status(UNAUTHORIZED).json(error);
+        res.status(UNAUTHORIZED).json({error:error});
     }
 }
