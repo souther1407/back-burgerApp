@@ -1,14 +1,16 @@
-import Router from 'express';
+import Router from "express";
 const router = Router();
-import { validarPassword } from '../Auth.js';
+import { CLIENT_ERROR } from "../../httpCodes.js";
+import { login } from "../services/auth.services.js";
 
-router.post('/ingresar', (req, res) => {
-  const { password } = req.body;
+router.post("/ingresar", async (req, res) => {
+  const { nombre, clave } = req.body;
   try {
-    const token = validarPassword(password);
+    const token = await login(nombre, clave);
     res.json({ token });
   } catch (error) {
     console.log(error);
+    res.status(CLIENT_ERROR).json({ error: (error as Error).message });
   }
 });
 
