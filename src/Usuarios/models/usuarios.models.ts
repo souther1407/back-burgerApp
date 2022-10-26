@@ -7,6 +7,7 @@ export default (sequelize: Sequelize) => {
       nombre: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       clave: {
         type: DataTypes.TEXT,
@@ -17,7 +18,7 @@ export default (sequelize: Sequelize) => {
       },
       token: {
         type: DataTypes.TEXT,
-        allowNull:false, 
+        allowNull: false,
       },
     },
     {
