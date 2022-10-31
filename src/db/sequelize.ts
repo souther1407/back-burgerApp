@@ -1,8 +1,7 @@
 import { Sequelize } from "sequelize";
-const db = new Sequelize({
-  dialect: "sqlite",
-  storage: "./db.sqlite",
-  logging: false,
+import config from "../config/config.js";
+const db = new Sequelize(config.DATABASE_URL, {
+  dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
 });
 
 import usuariosModels from "../Usuarios/models/usuarios.models.js";
