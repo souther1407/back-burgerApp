@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import config from "../config/config.js";
-const db = new Sequelize(config.DATABASE_URL, {
+const db = new Sequelize(config.DATABASE_URL!, {
   dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
 });
 
