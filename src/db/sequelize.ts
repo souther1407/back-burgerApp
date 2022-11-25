@@ -1,8 +1,16 @@
 import { Sequelize } from "sequelize";
 import config from "../config/config.js";
-const db = new Sequelize(config.DATABASE_URL!, {
-  dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
-});
+
+const db = new Sequelize(
+  config.DATABASE_URL!,
+  config.DEV === "no"
+    ? {
+        dialectOptions: {
+          ssl: { require: true, rejectUnauthorized: false },
+        },
+      }
+    : {}
+);
 
 import usuariosModels from "../Usuarios/models/usuarios.models.js";
 const Usuarios = usuariosModels(db);
