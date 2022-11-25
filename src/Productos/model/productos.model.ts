@@ -12,10 +12,6 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      disponible: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-      },
       precio: {
         type: DataTypes.FLOAT,
         allowNull: false,
