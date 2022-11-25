@@ -1,8 +1,8 @@
-import { DataTypes, Sequelize } from 'sequelize';
+import { DataTypes, Sequelize } from "sequelize";
 
 export default (sequelize: Sequelize) => {
   return sequelize.define(
-    'categorias',
+    "categorias",
     {
       titulo: {
         type: DataTypes.STRING,

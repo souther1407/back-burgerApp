@@ -16,10 +16,10 @@ setearRutas(app);
 
 app.listen(config.PORT, async () => {
   Logger.success("listening at port " + config.PORT);
-  await db.sync({ force: false });
+  await db.sync({ alter: true });
   //aaa
   Logger.success("db created");
-
+  /* 
   await usuarios.create({
     nombre: "user1",
     clave: "12345",
@@ -110,5 +110,5 @@ app.listen(config.PORT, async () => {
     { titulo: "Simple", precio: 150, productoId: 2, usuarioId: 1 },
     { titulo: "Doble", precio: 250, productoId: 2, usuarioId: 1 },
     { titulo: "Triple", precio: 350, productoId: 2, usuarioId: 1 },
-  ]);
+  ]); */
 });
