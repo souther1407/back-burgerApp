@@ -1,8 +1,8 @@
-import { DataTypes, Sequelize } from 'sequelize';
+import { DataTypes, Sequelize } from "sequelize";
 
 export default (sequelize: Sequelize) => {
   return sequelize.define(
-    'productos',
+    "productos",
     {
       titulo: {
         type: DataTypes.STRING,
@@ -11,6 +11,10 @@ export default (sequelize: Sequelize) => {
       descripcion: {
         type: DataTypes.TEXT,
         allowNull: false,
+      },
+      disponible: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
       },
       precio: {
         type: DataTypes.FLOAT,
