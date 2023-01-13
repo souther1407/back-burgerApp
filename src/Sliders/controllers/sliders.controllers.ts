@@ -9,7 +9,7 @@ import { OK } from "../../httpCodes.js";
 import ErrorHandler from "../../utils/ErrorHandler.js";
 const { handleHttpError } = ErrorHandler;
 
-const obtenerTodosLosSliders = async (req: Request, res: Response) => {
+export const obtenerTodosLosSliders = async (req: Request, res: Response) => {
   try {
     const { token } = req.body;
     const sliders = await obtenerSliders(token);
@@ -19,7 +19,7 @@ const obtenerTodosLosSliders = async (req: Request, res: Response) => {
   }
 };
 
-const crearUnSlider = async (req: Request, res: Response) => {
+export const crearUnSlider = async (req: Request, res: Response) => {
   try {
     const user = (req as any).user;
     const slider = await crearSlider(req.body, user.id);
@@ -29,7 +29,7 @@ const crearUnSlider = async (req: Request, res: Response) => {
   }
 };
 
-const modificarUnSlider = async (req: Request, res: Response) => {
+export const modificarUnSlider = async (req: Request, res: Response) => {
   try {
     const user = (req as any).user;
     const { id } = req.params;
@@ -40,7 +40,7 @@ const modificarUnSlider = async (req: Request, res: Response) => {
   }
 };
 
-const borrarUnSlider = async (req: Request, res: Response) => {
+export const borrarUnSlider = async (req: Request, res: Response) => {
   try {
     const user = (req as any).user;
     const { id } = req.params;
