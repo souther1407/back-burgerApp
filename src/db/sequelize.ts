@@ -12,6 +12,9 @@ const db = new Sequelize(
     : {}
 );
 
+import slidersModels from "../Sliders/models/sliders.model.js";
+const Sliders = slidersModels(db);
+
 import usuariosModels from "../Usuarios/models/usuarios.models.js";
 const Usuarios = usuariosModels(db);
 
@@ -27,6 +30,9 @@ const Variantes = variantesModel(db);
 Usuarios.hasMany(Productos);
 Usuarios.hasMany(Categorias);
 Usuarios.hasMany(Variantes);
+Usuarios.hasMany(Sliders);
+
+Sliders.belongsTo(Usuarios);
 Productos.belongsTo(Usuarios);
 Categorias.belongsTo(Usuarios);
 Variantes.belongsTo(Usuarios);
