@@ -1,4 +1,5 @@
 import db from "../../db/sequelize.js";
+import { Transaction } from "sequelize";
 const { productos, categorias, variantes, usuarios } = db.models;
 
 interface Producto {
@@ -19,9 +20,13 @@ export async function obtenerProductos(token: string) {
 
 export async function crear(
   datos: Producto,
-  usuario: { id: number; token: string }
+  usuario: { id: number; token: string },
+  t?: Transaction
 ) {
-  return await productos.create({ ...datos, usuarioId: usuario.id });
+  return await productos.create(
+    { ...datos, usuarioId: usuario.id },
+    { transaction: t }
+  );
 }
 
 export async function modificar(

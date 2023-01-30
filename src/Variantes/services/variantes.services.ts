@@ -1,5 +1,5 @@
 import db from "../../db/sequelize.js";
-
+import { Transaction } from "sequelize";
 const { variantes, productos, usuarios } = db.models;
 
 interface Variante {
@@ -21,13 +21,17 @@ export async function obtenerVariantes(id: string, token: string) {
 
 export async function crearVariante(
   body: Variante,
-  user: { id: string; token: string }
+  user: { id: string; token: string },
+  t?: Transaction
 ) {
   const existeVariante = await productos.findOne({
     where: { usuarioId: user.id, id: body.productoId },
   });
   if (!existeVariante) throw new Error("no existe el producto");
-  return await variantes.create({ ...body, usuarioId: user.id });
+  return await variantes.create(
+    { ...body, usuarioId: user.id },
+    { transaction: t }
+  );
 }
 
 export async function eliminarVariante(

@@ -8,6 +8,7 @@ import {
 import ErrorHandler from "../../utils/ErrorHandler.js";
 import { isTokenValid, verifyToken } from "../../Middelwares/Token.js";
 import Logger from "../../utils/Logger.js";
+import { createProductAndVariants } from "../transactions/product.transactions.js";
 const { handleHttpError } = ErrorHandler;
 const router = Router();
 
@@ -30,6 +31,21 @@ router.post(
       const user = (req as any).user;
       const nuevoProducto = await crear(req.body, user);
       res.json(nuevoProducto);
+    } catch (error) {
+      handleHttpError(error as Error, res);
+    }
+  }
+);
+
+router.post(
+  "/conVariantes",
+  verifyToken,
+  isTokenValid,
+  async (req: Request, res: Response) => {
+    try {
+      const user = (req as any).user;
+      const product = await createProductAndVariants(user, req.body);
+      res.json(product);
     } catch (error) {
       handleHttpError(error as Error, res);
     }
